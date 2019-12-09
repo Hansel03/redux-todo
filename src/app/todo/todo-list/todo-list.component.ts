@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { Store } from "@ngrx/store";
+import { AppState } from "src/app/app.reducer";
+import { Todo } from "../model/todo.model";
 
 @Component({
-  selector: 'app-todo-list',
-  templateUrl: './todo-list.component.html',
+  selector: "app-todo-list",
+  templateUrl: "./todo-list.component.html",
   styles: []
 })
 export class TodoListComponent implements OnInit {
+  public todos: Todo[] = [];
 
-  constructor() { }
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit() {
+    this.store.subscribe(state => {
+      this.todos = state.todos;
+    });
   }
-
 }
