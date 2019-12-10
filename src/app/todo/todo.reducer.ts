@@ -2,7 +2,8 @@ import {
   Acciones,
   AGREGAR_TODO,
   TOGGLE_TODO,
-  EDITAR_TODO
+  EDITAR_TODO,
+  BORRAR_TODO
 } from "./todo.actions";
 import { Todo } from "./model/todo.model";
 
@@ -40,6 +41,9 @@ export function todoReducer(state = estadoInicial, action: Acciones): Todo[] {
           return todoEdit;
         }
       });
+
+    case BORRAR_TODO:
+      return state.filter(todoEdit => todoEdit.id !== action.id);
 
     default:
       return state;
