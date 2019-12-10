@@ -1,4 +1,9 @@
-import { Acciones, AGREGAR_TODO, TOGGLE_TODO } from "./todo.actions";
+import {
+  Acciones,
+  AGREGAR_TODO,
+  TOGGLE_TODO,
+  EDITAR_TODO
+} from "./todo.actions";
 import { Todo } from "./model/todo.model";
 
 const todo1 = new Todo("Vencer a Thonos");
@@ -18,6 +23,18 @@ export function todoReducer(state = estadoInicial, action: Acciones): Todo[] {
           return {
             ...todoEdit,
             completado: !todoEdit.completado
+          };
+        } else {
+          return todoEdit;
+        }
+      });
+
+    case EDITAR_TODO:
+      return state.map(todoEdit => {
+        if (todoEdit.id === action.id) {
+          return {
+            ...todoEdit,
+            texto: action.texto
           };
         } else {
           return todoEdit;
