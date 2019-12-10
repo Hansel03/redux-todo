@@ -3,7 +3,8 @@ import {
   AGREGAR_TODO,
   TOGGLE_TODO,
   EDITAR_TODO,
-  BORRAR_TODO
+  BORRAR_TODO,
+  TOOGLE_ALL_TODO
 } from "./todo.actions";
 import { Todo } from "./model/todo.model";
 
@@ -44,6 +45,14 @@ export function todoReducer(state = estadoInicial, action: Acciones): Todo[] {
 
     case BORRAR_TODO:
       return state.filter(todoEdit => todoEdit.id !== action.id);
+
+    case TOOGLE_ALL_TODO:
+      return state.map(todoEdit => {
+        return {
+          ...todoEdit,
+          completado: action.completado
+        };
+      });
 
     default:
       return state;
