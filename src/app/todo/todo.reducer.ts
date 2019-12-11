@@ -4,7 +4,8 @@ import {
   TOGGLE_TODO,
   EDITAR_TODO,
   BORRAR_TODO,
-  TOOGLE_ALL_TODO
+  TOOGLE_ALL_TODO,
+  LIMPIAR_TODO
 } from "./todo.actions";
 import { Todo } from "./model/todo.model";
 
@@ -53,6 +54,9 @@ export function todoReducer(state = estadoInicial, action: Acciones): Todo[] {
           completado: action.completado
         };
       });
+
+    case LIMPIAR_TODO:
+      return state.filter(todos => !todos.completado);
 
     default:
       return state;
